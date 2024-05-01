@@ -1,12 +1,7 @@
-.dashboard h1,
+.dashboard
 p {
     font-size: 20px;
-    color: rgba(75, 164, 242, 0.868);
-}
-
-.userName {
-    font-size: 33px;
-    color: #f0ff47;
+    color: rgb(246, 254, 206);
 }
 
 .hamburgerMenu {
@@ -30,58 +25,78 @@ p {
 }
 
 
-.homeMain {
+
+.homeMain-home {
     width: 90vw;
     height: 80vh;
-    padding: 0px;
     border-radius: 0 0 18px 18px;
     display: flex;
     flex-direction: row;
     background-color: #27214e9f;
-    border: 2px solid #f0ff4700;
-
 }
 
-.data-container {
-    border: 2px solid #fff;
+
+
+.dashboard-container-home {
+    width: 100%;
+    background-color: #05782b20;
     display: flex;
-    margin-top: 0px;
-    width: 70%;
-    padding: 20px;
+    flex-direction: column;
+    border-radius: 0 0 18px 0;
+}
+
+.trio-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.duo-container {
+    
+    display: flex;
+    justify-content: space-evenly;
 
 }
 
 
-.box {
-    margin-top: 20px;
-    margin-left: 20px;
-    padding: 10px;
-    width: 550px;
-    background-color: rgba(0, 0, 0, 0.875);
-    height: 450px;
-    border-radius: 30px;
-
-    p {
-        margin-top: 10px;
-        font-size: 20px;
-        text-align: center;
-        color: aquamarine;
-    }
+.title {
+    background-color: turquoise;
+    width: 300px;
+    height: 250px;
 }
 
-.box2 {
-    margin-top: 20px;
-    margin-left: 20px;
-    padding: 10px;
-    width: 400px;
-    background-color: rgba(0, 0, 0, 0.875);
-    height: 450px;
-    border-radius: 30px;
+.title2 {
+    background-color: rgb(66, 178, 234);
+    width: 300px;
+    height: 250px;
+}
 
-    p {
-        margin-top: 10px;
-        font-size: 20px;
-        text-align: center;
-        color: aquamarine;
+
+.b1 {
+    background-color: rgb(255, 196, 1);
+    width: 250px;
+    height: 250px;
+}
+.b2 {
+    background-color: rgb(236, 68, 255);
+    width: 250px;
+    height: 250px;
+}
+.b3 {
+    background-color: rgb(115, 224, 75);
+    width: 250px;
+    height: 250px;
+
+}
+.daily-bible-verse{
+    position: absolute;
+    width: 200px;
+    padding: 10px;
+    margin-top: 20px;
+    
+    p{
+        font-size: 15px;
+        color: rgb(255, 255, 224);
+        margin-bottom: 10px;
     }
 }

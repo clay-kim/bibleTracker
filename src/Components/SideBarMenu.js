@@ -1,25 +1,25 @@
 import React from 'react';
 import './SideBarMenu.css';
+import { Link } from 'react-router-dom';
 
 
-export const SideBarMenu = ({show}) => {
+export const SideBarMenu = ({ show }) => {
     return (
-        <div className= {show ? 'SideBarContainer active' : 'SideBarContainer'}>
-        
+  
+        <div className={show ? 'SideBarContainer active' : 'SideBarContainer'}>
+      
             <ul>
                 <li>
-                    <a href='/dashboard'>Dashboard</a>
+                    <Link to="/Home">Dashboard</Link>
                 </li>
                 <li>
-                    <a href='/bible'>Bible</a>
+                    <Link to="/bible">Bible</Link>
                 </li>
                 <li>
-                    <a href='/notes'>Notes</a>
+                    <Link to="/notes">Notes</Link>
                 </li>
-
-            
             </ul>
-          
+
         </div>
     );
 };

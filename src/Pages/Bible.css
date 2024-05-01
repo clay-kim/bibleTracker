@@ -1,0 +1,141 @@
+.dashboard h1,
+p {
+    font-size: 50px;
+    color: rgba(20, 22, 24, 0.88);
+}
+
+.userName {
+    font-size: 33px;
+    color: #f0ff47;
+}
+
+.hamburgerMenu {
+
+    position: absolute;
+    color: aliceblue;
+    font-size: 25px;
+    margin: 15px 0 0 215px;
+    cursor: pointer;
+}
+
+.hamburgerMenu :hover {
+    color: rgba(46, 198, 241, 0.69);
+}
+
+.hamburgerMenu:active {
+    color: #9e54e9c1;
+    box-shadow: 0 5px #666;
+    transform: translateY(3px);
+
+}
+
+
+.homeMain {
+    width: 90vw;
+    height: 80vh;
+    padding: 0px;
+    border-radius: 0 0 18px 18px;
+    display: flex;
+    flex-direction: row;
+    background-color: #27214e9f;
+    border: 2px solid #f0ff4700;
+
+}
+
+.data-container {
+    border: 2px solid #fff;
+    display: flex;
+    margin-top: 0px;
+    width: 70%;
+    padding: 20px;
+
+}
+
+
+.box {
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 10px;
+    width: 550px;
+    background-color: rgba(0, 0, 0, 0.875);
+    height: 450px;
+    border-radius: 30px;
+
+    p {
+        margin-top: 10px;
+        font-size: 20px;
+        text-align: center;
+        color: aquamarine;
+    }
+}
+
+.box2 {
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 10px;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.875);
+    height: 450px;
+    border-radius: 30px;
+
+    p {
+        margin-top: 10px;
+        font-size: 20px;
+        text-align: center;
+        color: aquamarine;
+    }
+}
+
+.dashboard-container {
+    width: 100%;
+    background-color: #f0e7e77e;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 0 18px 0;
+}
+
+.top-container {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.bottom-container {
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+
+.b-1 {
+    background-color: turquoise;
+    width: 300px;
+
+}
+
+.b-2 {
+    background-color: rgb(66, 178, 234);
+    width: 300px;
+
+}
+
+
+.t1 {
+    background-color: rgb(255, 196, 1);
+    width: 100%;
+
+}
+
+.hamburgerMenu {
+    color: rgba(13, 162, 255, 0.678);
+    margin-left: 200px;
+    font-size: 25px;
+}
+
+.hamburgerMenu:hover {
+    color: #e3f86f;
+    transform: rotate(200deg);
+    
+}

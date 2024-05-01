@@ -18,10 +18,10 @@
     align-items: center;
     margin-left: 0px;
     
-    p{
+    p {
         margin-left: 10px;
         font-size: 1em;
-        color: rgba(255, 242, 0, 0.858);        
+        color: rgba(13, 162, 255, 0.858);        
     }
 }
 
@@ -30,9 +30,9 @@
     display: flex;
     width: 600px;
     height: 50px;
-
+   
     align-items: center;
-    justify-content: left
+    justify-content: space-evenly;
 }
 
 .SearchBar p{
@@ -74,9 +74,8 @@
 }
 
 
-.OtherMenu {
+.Logout {
     display: flex;
-    justify-content: right;
     align-items: center;
     width: 90px;
     height: 50px;
@@ -84,11 +83,14 @@
     p{
         margin-left: 10px;
         font-size: 1em;
-        color: rgba(255, 255, 245, 0.996);        
+        color: rgba(74, 165, 239, 0.8);        
         cursor: pointer;
     }
 
-    p:hover {color: #79fbdeba}
+    p:hover {
+        color: #79fbdfc0;
+        transform: translateY(3px);
+    }
 
     p:active {
     color: #9e54e9c1;
@@ -106,8 +108,7 @@
 
 
     .icon {
-        color: rgba(224, 88, 255, 0.875);
-        font-size: 2em;
+        color: rgba(125, 48, 232, 0.739);
+        font-size: 1.8em;
     }
 }
-

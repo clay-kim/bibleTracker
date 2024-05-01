@@ -5,7 +5,7 @@ import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-export const LoginForm = ({ onLogin }) => {
+export const LoginForm = () => {
 
     const [message, setMessage] = useState(""); // State variable for notification/message
     const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -52,13 +52,6 @@ export const LoginForm = ({ onLogin }) => {
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        // Check if email already exists
-        const isEmailDuplicate = await checkEmailDuplicate(email);
-        if (isEmailDuplicate) {
-            setMessage("Email is already in use. Please use a different email.");
-            return;
-        }
-
         const userData = {
             email: email,
             username: username,
@@ -75,7 +68,7 @@ export const LoginForm = ({ onLogin }) => {
                 },
                 body: JSON.stringify(userData)
             });
-            console.error("HERE!!:", userData);
+            
             // Check if user is registered successfully
             if (response.status === 200) {
                 setMessage("Registered successfully");
@@ -84,22 +77,11 @@ export const LoginForm = ({ onLogin }) => {
             } else {
                 // Registration failed, display error message
                 console.error("Registration failed:", userData);
-                setMessage("Incorrect email or password. Please try again.");
+                setMessage("Email is already in use. Please use a different email.");
             }
         } catch (error) {
             console.error("Error:", error);
             setMessage("An error occurred. Please try again later.");
-        }
-    };
-
-    const checkEmailDuplicate = async (email) => {
-        try {
-            const response = await fetch(`https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/user?email=${email}`);
-            const result = await response.json();
-            return response.status === 200 && result.length > 0;
-        } catch (error) {
-            console.error("Error checking email duplicate:", error);
-            return false;
         }
     };
 

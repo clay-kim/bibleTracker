@@ -4,9 +4,9 @@ import TopSearchBarMenu from '../Components/TopSearchBarMenu';
 import SideBarMenu from '../Components/SideBarMenu';
 import { FaRegLightbulb } from "react-icons/fa";
 
-
-export const Notes = () => {
+export const Notes = (randomVerse) => {
     const [showNav, setShowNav] = useState(true);
+    const { book, chapter, verse, verseNumber } = randomVerse.randomVerse || {};
 
     return (
         <div className='dashboard'>
@@ -16,6 +16,12 @@ export const Notes = () => {
             <TopSearchBarMenu />
 
             <div className='homeMain'>
+                <div className='daily-bible-verse'>
+                    <p>Daily Word of God</p>
+                    <p>{book} {chapter} : {verseNumber}</p>
+                    <p>"{verse}"</p>
+                    <p>{book} {chapter}장 읽기</p>
+                </div>
                 <SideBarMenu show={showNav} />
 
                 <div className='dashboard-container'>

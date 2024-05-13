@@ -10,7 +10,7 @@ export const SideBarMenu = ({ show }) => {
       
             <ul>
                 <li>
-                    <Link to="/Home">Dashboard</Link>
+                    <Link to="/home">Dashboard</Link>
                 </li>
                 <li>
                     <Link to="/bible">Bible</Link>

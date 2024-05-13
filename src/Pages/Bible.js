@@ -4,54 +4,25 @@ import TopSearchBarMenu from '../Components/TopSearchBarMenu';
 import SideBarMenu from '../Components/SideBarMenu';
 import { FaRegLightbulb } from "react-icons/fa";
 import KoreanBibleData from '../Components/Assets/bibleKOR.json';
+import { getFullBookName, bookNames } from '../Components/BibleUtil.js';
+import ReadBible from './ReadBible.js';
+import { Link } from 'react-router-dom';
 
 
-
-export const Bible = () => {
+export const Bible = (randomVerse) => {
     const [showNav, setShowNav] = useState(true);
+    const { book, chapter, verse, verseNumber } = randomVerse.randomVerse || {};
 
-    const [bibleData, setBibleData] = useState([]);
-    const [randomVerse, setRandomVerse] = useState('');
+    const handleBookClick = (bookAbbrev) => {
+        const selectedBook = KoreanBibleData.find(book => book.abbrev === bookAbbrev);
+        if (selectedBook) {
 
-
-
-    useEffect(() => {
-        // Fetch and set the Bible data when the component mounts
-        setBibleData(KoreanBibleData);
-        //console.log('Korean Bible Data:', KoreanBibleData);
-
-        // Get and set a random verse when the component mounts
-        const verse = getRandomVerse();
-        setRandomVerse(verse);
-    }, []);
-
-    const getRandomVerse = () => {
-        // Generate a random index to select a book
-        const randomBookIndex = Math.floor(Math.random() * KoreanBibleData.length);
-        const randomBook = KoreanBibleData[randomBookIndex];
-
-        // Select a random chapter from the selected book
-        const randomChapterIndex = Math.floor(Math.random() * randomBook.chapters.length);
-        const randomChapter = randomBook.chapters[randomChapterIndex];
-
-        // Select a random verse from the selected chapter
-        const randomVerseIndex = Math.floor(Math.random() * randomChapter.length);
-        const randomVerse = randomChapter[randomVerseIndex];
-
-        // Get the chapter and verse numbers
-        const chapterNumber = randomChapterIndex + 1;
-        const verseNumber = randomVerseIndex + 1;
-
-        // Return an object containing the verse text, chapter number, and verse number
-        return {
-            book: randomBook.abbrev,
-            verse: randomVerse,
-            chapter: chapterNumber,
-            verseNumber: verseNumber
-        };
+        } else {
+            console.log(`Book ${bookAbbrev} not found in KoreanBibleData.`);
+        }
     };
 
-    console.log("Random Verse:: ", randomVerse);
+
     return (
         <div className='dashboard'>
 
@@ -60,19 +31,44 @@ export const Bible = () => {
             <TopSearchBarMenu />
 
             <div className='homeMain'>
+                <div className='daily-bible-verse'>
+                    <p>Daily Word of God</p>
+                    <p>{book} {chapter} : {verseNumber}</p>
+                    <p>"{verse}"</p>
+                    <p>{book} {chapter}장 읽기</p>
+                </div>
                 <SideBarMenu show={showNav} />
 
-                <div className='dashboard-container'>
-
-                    <div className='top-container'>
-                        <div className='t1'>Any Title</div>
-                    </div>
-
+                <div className='dashboard-container-bible'>
                     <div className='bottom-container'>
-                        <div className='b-1'><h1>Old</h1></div>
-                        <div className='b-2'><h1>New</h1></div>
+
+                        <div className='b-1'>
+                            <h1>Old</h1>
+                            <ul className="book-list">
+                                {Object.keys(bookNames).slice(0, 39).map((bookAbbrev) => (
+                                    <li key={bookAbbrev}>
+                                        <Link to={`/bible/${bookAbbrev}`} className="book-link" onClick={() => handleBookClick(bookAbbrev)}>{getFullBookName(bookAbbrev)}</Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className='b-2'>
+                            <h1>New</h1>
+                            <ul className="book-list">
+                                {Object.keys(bookNames).slice(39, 66).map((bookAbbrev) => (
+                                    <li key={bookAbbrev}>
+                                        <Link to={`/bible/${bookAbbrev}`} className="book-link" onClick={() => handleBookClick(bookAbbrev)}>{getFullBookName(bookAbbrev)}</Link>
+                                    </li>
+                                ))}
+                            </ul>
+
+                        </div>
+
                     </div>
                 </div>
+
+
             </div>
 
         </div>

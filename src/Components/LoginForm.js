@@ -14,7 +14,6 @@ export const LoginForm = () => {
     const [username, setUsername] = useState('');
     const navigate = useNavigate(); // Hook for navigation
 
-
     const toggleRegisterForm = () => {
         setShowRegisterForm(!showRegisterForm);
     };
@@ -28,6 +27,7 @@ export const LoginForm = () => {
             // Check if user exists
             if (response.status === 200) {
                 const username = userData[1];
+                localStorage.setItem('username', username); // Store username in localStorage
                 navigate('/Home', { state: { username } });
 
             } else if (response.status === 409) {
@@ -68,7 +68,7 @@ export const LoginForm = () => {
                 },
                 body: JSON.stringify(userData)
             });
-            
+
             // Check if user is registered successfully
             if (response.status === 200) {
                 setMessage("Registered successfully");

@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+
+
 .dashboard h1,
 p {
     font-size: 50px;
@@ -86,12 +90,16 @@ p {
     }
 }
 
-.dashboard-container {
+.dashboard-container-bible {
     width: 100%;
-    background-color: #f0e7e77e;
     display: flex;
     flex-direction: column;
     border-radius: 0 0 18px 0;
+    margin-top: 20px;
+}
+
+.bottom-container h1 {
+    border-bottom: 2px solid #bbbbbb;
 }
 
 .top-container {
@@ -105,20 +113,30 @@ p {
     height: 100%;
     display: flex;
     justify-content: space-evenly;
-
+    margin-top: 25px;
+    scroll-behavior: smooth;
+    
 }
 
 
 .b-1 {
-    background-color: turquoise;
+    background-color: rgba(50, 193, 178, 0.497);
     width: 300px;
+    height: 90%;
 
 }
 
-.b-2 {
-    background-color: rgb(66, 178, 234);
-    width: 300px;
+.book-list {
+    height: 85%; /* Adjust the maximum height as needed */
+    overflow-y: auto;
+    font-family: 'Poppins', sans-serif;
+}
 
+
+.b-2 {
+    background-color: rgba(66, 178, 234, 0.593);
+    width: 300px;
+    height: 90%;
 }
 
 

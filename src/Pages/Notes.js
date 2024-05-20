@@ -1,12 +1,160 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import './Notes.css';
 import TopSearchBarMenu from '../Components/TopSearchBarMenu';
 import SideBarMenu from '../Components/SideBarMenu';
 import { FaRegLightbulb } from "react-icons/fa";
+import DailyVerse from '../Components/DailyVerse';
+import { getFullBookName, bookNames } from '../Components/BibleUtil';
+import KoreanBibleData from '../Components/Assets/bibleKOR.json';
+import NotesList from './NoteList';
+
+
 
 export const Notes = (randomVerse) => {
     const [showNav, setShowNav] = useState(true);
-    const { book, chapter, verse, verseNumber } = randomVerse.randomVerse || {};
+    const [selectedBook, setSelectedBook] = useState('');
+    const [selectedChapter, setSelectedChapter] = useState('');
+    const [startVerse, setStartVerse] = useState('');
+    const [endVerse, setEndVerse] = useState('');
+    const [charCount, setCharCount] = useState(0);
+    const [notes, setNotes] = useState([]);
+    const [noteContent, setNoteContent] = useState('');
+    const [userId, setUserId] = useState('');
+    const bookAbbreviations = Object.keys(bookNames);
+
+
+    useEffect(() => {
+        const fetchNotes = async () => {
+            const storedUserId = localStorage.getItem('userId');
+            setUserId(storedUserId);
+
+            if (storedUserId) {
+                try {
+                    const response = await fetch(`https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/notes?userId=${storedUserId}`);
+                    const data = await response.json();
+                    setNotes(data);
+                    console.log("API Response:", response);
+                    console.log("Fetched Data:", data);
+
+                    if (Array.isArray(data)) {
+                        console.log("Current Notes State before update:", notes);
+                        setNotes(data);
+                        console.log("Notes have been set to:", data);
+                        console.log("before update:", notes);
+                    } else {
+                        console.error('Fetched data is not an array:', data);
+                    }
+
+                } catch (error) {
+                    console.error('Error fetching notes:', error);
+                }
+            } else {
+                console.error('No userId found in localStorage');
+            }
+        };
+
+        fetchNotes();
+    }, [userId]);
+
+
+    const handleStartVerseChange = (e) => {
+        const input = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+        setStartVerse(input);
+    };
+    const handleEndVerseChange = (e) => {
+        const input = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+        setEndVerse(input);
+    };
+
+
+    const handleSubmit = async () => {
+        // Construct the new note object
+        const newNote = {
+            userId: parseInt(userId, 10), // Convert to integer
+            book: selectedBook,
+            chapter: parseInt(selectedChapter, 10), // Convert to integer
+            startVerse: parseInt(startVerse, 10), // Convert to integer
+            endVerse: parseInt(endVerse, 10), // Convert to integer
+            noteContent: noteContent,
+            createdAt: new Date().toDateString().toString(),
+        };
+
+        if (startVerse > endVerse) {
+            alert('Starting verse should be less than or equal to ending verse');
+            return;
+
+        } else {
+
+            const updatedNotes = [...notes, newNote];
+            setNotes(updatedNotes);
+            console.log("INFO::: ", notes);
+
+            setSelectedBook('');
+            setSelectedChapter('');
+            setStartVerse('');
+            setEndVerse('');
+            setNoteContent('');
+            setCharCount(0);
+
+            try {
+                const response = await fetch('https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/notes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newNote),
+                });
+
+                if (response.ok) {
+                    const savedNote = await response.json();
+                    setNotes([...notes, savedNote]);
+                   // setNotes((prevNotes) => [...prevNotes, newNote]);
+
+                    // Clear input fields
+                    setSelectedBook('');
+                    setSelectedChapter('');
+                    setStartVerse('');
+                    setEndVerse('');
+                    setNoteContent('');
+                    setCharCount(0);
+                } else {
+                    alert('Failed to save the note');
+                }
+            } catch (error) {
+                console.error('Error saving note:', error);
+                alert('An error occurred while saving the note. Please try again later.');
+            }
+        }
+    };
+
+
+
+    const handleNoteChange = (e) => {
+        const value = e.target.value;
+        setNoteContent(value);
+        // Remove spaces and update character count
+        const charCountWithoutSpaces = value.replace(/\s/g, '').length;
+        setCharCount(charCountWithoutSpaces);
+    };
+
+
+    const deleteNote = (noteId) => {
+        setNotes(notes.filter(note => note.noteId !== noteId));
+    };
+
+
+    // Generating the list of books from the selected book
+    const chapterOptions = useMemo(() => {
+        if (!selectedBook) return [];
+        const selectedBookData = KoreanBibleData.find((book) => book.abbrev === selectedBook);
+        if (!selectedBookData) return [];
+        return selectedBookData.chapters.map((_, index) => ({ label: index + 1, value: index + 1 }));
+    }, [selectedBook]);
+
+
+
+
+
 
     return (
         <div className='dashboard'>
@@ -16,30 +164,98 @@ export const Notes = (randomVerse) => {
             <TopSearchBarMenu />
 
             <div className='homeMain'>
-                <div className='daily-bible-verse'>
-                    <p>Daily Word of God</p>
-                    <p>{book} {chapter} : {verseNumber}</p>
-                    <p>"{verse}"</p>
-                    <p>{book} {chapter}장 읽기</p>
-                </div>
+                <DailyVerse randomVerse={randomVerse} />
+
                 <SideBarMenu show={showNav} />
 
                 <div className='dashboard-container'>
 
                     <div className='top-container-note'>
-                        <div className='note-t1'>Reflection</div>
+                        <div className='note-t1'>
+                            <h2>Enlightened Reflections</h2>
+                            <h4>Finding Wisdom in Words</h4>
+                        </div>
                     </div>
 
                     <div className='bottom-container-note'>
-                        <div className='note-b1'>
+                        <div className='note-container-left'>
+
                             <div className='note-dropdown-container'>
-                                DropDown menus
+                                <div className="note-SearchBar">
+                                    <div className="note-announce">
+                                        <h5>말씀 구절 기록을 위하여 해당하는 구절을 표기해주세요.</h5>
+                                    </div>
+                                    <div className="note-SearchBox">
+                                        <div className="menu-container">
+                                            <h6>Book</h6>
+                                            <select className='inputBox'
+                                                value={selectedBook}
+                                                onChange={(e) => setSelectedBook(e.target.value)}
+                                            >
+                                                <option value=""></option>
+                                                {bookAbbreviations.map((bookAbbrev) => (
+                                                    <option key={bookAbbrev} value={bookAbbrev}>
+                                                        {getFullBookName(bookAbbrev)}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+
+
+                                        <div className="menu-container">
+                                            <h6>Chapter</h6>
+                                            <select className='inputBox'
+                                                value={selectedChapter}
+                                                onChange={(e) => setSelectedChapter(e.target.value)}
+                                            >
+                                                <option value=""></option>
+                                                {chapterOptions.map((chapters) => (
+                                                    <option key={chapters.value} value={chapters.value}>
+                                                        {chapters.label}장
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+
+                                        <div className="menu-container">
+                                            <h6>Beginning</h6>
+                                            <input className='inputBox'
+                                                type="text"
+                                                value={startVerse}
+                                                onChange={handleStartVerseChange}
+                                                placeholder="Verse"
+                                            />
+                                        </div>
+                                        <div className="menu-container">
+                                            <h6>End</h6>
+                                            <input className='inputBox'
+                                                type="text"
+                                                value={endVerse}
+                                                onChange={handleEndVerseChange}
+                                                placeholder="Verse"
+                                            />
+                                        </div>
+                                    </div>
+                                    <button onClick={handleSubmit} className="note-SearchButton">Submit</button>
+                                </div>
                             </div>
                             <div className='note-input-container'>
-                                InputBox
+                                <form>
+                                    <textarea className='inputField'
+                                        type="text"
+                                        value={noteContent}
+                                        onChange={handleNoteChange}
+                                        placeholder="Write reflections..."
+                                    />
+                                </form>
+                                <div className='charCount'>Character count: {charCount}</div>
                             </div>
                         </div>
-                        <div className='noteList-container'><h1>List</h1></div>
+                        <div className='noteList-container'>
+                            <NotesList userId={userId} notes={notes} deleteNote={deleteNote} />
+
+                        </div>
+
                     </div>
 
                 </div>

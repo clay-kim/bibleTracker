@@ -17,13 +17,13 @@ export const ReadBible = (randomVerse) => {
 
     // State to hold the current chapter number
     const [currentChapter, setCurrentChapter] = useState(parseInt(chapterNumber) || 1);
-   
+
     useEffect(() => {
-        // Update currentChapter when the URL changes
+        // Re-render bible content based on the current chapter
         setCurrentChapter(parseInt(chapterNumber) || 1);
     }, [chapterNumber]);
 
-    
+
     // Function to get the content of the current chapter
     const getCurrentChapterContent = () => {
         if (selectedBook) {
@@ -36,6 +36,7 @@ export const ReadBible = (randomVerse) => {
     // Content of the current chapter
     const currentChapterContent = getCurrentChapterContent();
 
+
     // Handler function for going forward and backward chapter
     const handleNextChapter = () => {
         if (currentChapter < selectedBook.chapters.length) {
@@ -43,7 +44,6 @@ export const ReadBible = (randomVerse) => {
             navigate(`/bible/${selectedBook.abbrev}/${currentChapter + 1}`);
         }
     };
-
     const handlePreviousChapter = () => {
         if (currentChapter > 1) {
             setCurrentChapter(currentChapter - 1);
@@ -51,15 +51,7 @@ export const ReadBible = (randomVerse) => {
         }
     };
 
-    // useEffect(() => {
-    //     // Fetch additional data or perform side effects here if needed
-    //     // This will re-run whenever selectedBook or currentChapter changes
-    //     // You can put additional logic here based on the selected book and chapter
-    //     console.log('FROM ReadBible-Selected book:', selectedBook);
-    //     console.log('FROM ReadBible-Current chapter:', currentChapter);
-    // }, [selectedBook, currentChapter]);
 
-    
     return (
         <div className='dashboard'>
             <p>Reading Verses</p>

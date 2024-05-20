@@ -9,12 +9,13 @@ p {
     position: absolute;
     color: aliceblue;
     font-size: 25px;
-    margin: 15px 0 0 215px;
+    margin: 15px 0 0 195px;
     cursor: pointer;
+
 }
 
 .hamburgerMenu :hover {
-    color: rgba(46, 198, 241, 0.69);
+    color: rgba(255, 205, 22, 0.894);
 }
 
 .hamburgerMenu:active {
@@ -29,10 +30,12 @@ p {
 .homeMain-home {
     width: 90vw;
     height: 80vh;
+    padding: 0px;
     border-radius: 0 0 18px 18px;
     display: flex;
     flex-direction: row;
     background-color: #27214e9f;
+    border: 2px solid #f0ff4700;
 }
 
 
@@ -98,5 +101,6 @@ p {
         font-size: 15px;
         color: rgb(255, 255, 224);
         margin-bottom: 10px;
+        cursor: pointer;
     }
 }

@@ -1,9 +1,3 @@
-.dashboard h1,
-p {
-    font-size: 50px;
-    color: rgba(20, 22, 24, 0.88);
-}
-
 .userName {
     font-size: 33px;
     color: #f0ff47;
@@ -46,66 +40,210 @@ p {
 
 .dashboard-container {
     width: 100%;
-    background-color: #f0e7e77e;
+    background-color: #df0f0f00;
     display: flex;
     flex-direction: column;
     border-radius: 0 0 18px 0;
 }
 
 .top-container-note {
-    background-color: rgba(72, 70, 70, 0.596);
+    background-color: rgba(5, 210, 149, 0);
     height: 100px;
     display: flex;
     justify-content: space-between;
-
 }
 
-.note-t1 {
-    background-color: rgb(193, 73, 43);
-    width: 100%;
-    font-size: 35px;
 
+.note-t1 {
+    width: 100%;
+    h4 {
+        font-size: 24px;
+        color: #ffe6fd9b;
+        text-align: center;
+        font-weight: 100;
+    }
+}
+
+.note-t1 h2{
+    color: #131a0edf;
+    text-shadow: 0px 2px 1px rgba(224, 246, 57, 0.194);
+    font-size: 54px;
+    font-weight: 100;
+    margin-left: 20px;
 }
 
 
 .bottom-container-note {
-    height: 100%;
+    height: 75%;
     display: flex;
     justify-content: space-evenly;
-    margin-top: 20px;
-
-    
+    margin-top: 60px;
 }
 
 
-.note-b1 {
-    background-color: turquoise;
-    width: 600px;
+/*
+==============  > LEFT SIDE
+*/
+
+
+.note-container-left {
+    background-color: rgba(130, 169, 71, 0);
+    border-radius: 18px;
+    width: 45%;
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.note-dropdown-container {
+    border: 2px solid #d0725800;
+    height: 70%;
+    width: 40%;
+    margin-bottom: 20px;
+}
+
+.note-input-container {
+    padding: 5px;
+    border: 2px solid #e8f2d4ac;
+    width: 60%;
+    height: 55%;
+    margin-left: 10px;
+    background-color: rgba(255, 255, 255, 0.758);
+
+}
+
+.inputBox {
+    width: 80px;
+    border-radius: 25px;
+    margin-left: 5px;
+    height: 25px;
+    text-align: center;
+    background-color: #7bc8aa86;
+    color: rgb(255, 240, 240);
+    border: none;
+    cursor: pointer;
+}
+.inputBox:hover {
+    background-color: #79fbdeba
+}
+
+::placeholder {
+    color: rgb(255, 240, 240);
+    opacity: 0.3;
+    /* Firefox */
+}
+
+.note-announce {
+    background-color: #6bc4f800;
+    border-bottom: 1px solid #ffffffd1;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.note-SearchBox {
+    background-color: #f0ff4700;
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: center;
-}
-
-.note-dropdown-container{
-    border: 2px solid #574ed5;
-    height: 50px;
+    justify-content: space-evenly;
+    height: 500px;
     width: 100%;
 }
 
-.note-input-container{
-    padding: 5px;
-    border: 3px solid #221819;
-    width: 90%;
-    height: 50%;
+.note-SearchBar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #7066f600;
+    justify-content: space-between;
+    align-items: center;
+    color: whitesmoke;
+    ;
 
+    h5 {
+        color: rgba(169, 223, 205, 0.458);
+        text-shadow: 0px 0px .6px rgba(250, 250, 39, 0.555);
+    }
+
+    h6 {
+        font-size: 14px;
+        text-align: left;
+        color: rgba(245, 195, 221, 0.915);
+
+    }
 }
+
+
+
+.menu-container {
+    background-color: #be393900;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.note-SearchButton {
+    width: 90px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgba(90, 201, 142, 0.617);
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    color: rgba(3, 91, 223, 0.778);
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.note-SearchButton:hover {
+    background-color: #79fbdeba
+}
+
+
+.note-input-container {
+    display: block;
+    background-color: #03121ab9;
+    border-radius: 10px;
+    border: 2px solid #c6b8d5cc;
+    height: 300px;
+    margin-top: 50px;
+}
+
+
+.inputField {
+    width: 100%;
+    height: 260px;
+    border-radius: 7px;
+    background: transparent;
+    color: white;
+    border: 1px solid #b3fefe8e;
+    padding: 10px;
+}
+
+
+.charCount {
+    color: #adbfeeb4;
+    font-size: 12px;
+}
+
+/*
+==============  > RIGHT SIDE
+*/
+
+
 
 .noteList-container {
-    background-color: rgb(66, 178, 234);
-    width: 250px;
-
+    background-color: rgba(6, 10, 217, 0);
+    display: flex;
+    border-radius: 10px;
+    width: 40%;
+    max-height: 450px;
+    overflow: auto;
+    scrollbar-color: rgba(5, 92, 82, 0.85) rgba(21, 36, 73, 0.36);
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
 }
-
-
-

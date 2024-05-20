@@ -16,13 +16,10 @@ export const TopSearchBarMenu = () => {
     const bookAbbreviations = Object.keys(bookNames);
 
     const handleLogout = () => {
-        console.log('Logout clicked');
         navigate('/', { replace: true });
     };
 
     const handleSearch = () => {
-        console.log('Selected book:', selectedBook);
-        console.log('Selected chapter:', selectedChapter);
         navigate(`/bible/${selectedBook}/${selectedChapter}`);
     };
 

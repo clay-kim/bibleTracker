@@ -14,16 +14,15 @@ p {
 }
 
 .hamburgerMenu {
-
     position: absolute;
     color: aliceblue;
     font-size: 25px;
-    margin: 15px 0 0 215px;
+    margin: 15px 0 0 195px;
     cursor: pointer;
 }
 
 .hamburgerMenu :hover {
-    color: rgba(46, 198, 241, 0.69);
+    color: rgba(255, 205, 22, 0.894);
 }
 
 .hamburgerMenu:active {
@@ -115,6 +114,9 @@ p {
     justify-content: space-evenly;
     margin-top: 25px;
     scroll-behavior: smooth;
+    scrollbar-color: rgba(202, 242, 237, 0.85) rgba(11, 19, 39, 0.36);
+    scrollbar-width: thin;
+
     
 }
 
@@ -123,6 +125,8 @@ p {
     background-color: rgba(50, 193, 178, 0.497);
     width: 300px;
     height: 90%;
+    border-radius: 8px;
+    box-shadow: 5px 8px #0101013f;
 
 }
 
@@ -137,6 +141,8 @@ p {
     background-color: rgba(66, 178, 234, 0.593);
     width: 300px;
     height: 90%;
+    border-radius: 8px;
+    box-shadow: 5px 8px #0101013f;
 }
 
 

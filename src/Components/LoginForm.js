@@ -9,9 +9,10 @@ export const LoginForm = () => {
 
     const [message, setMessage] = useState(""); // State variable for notification/message
     const [showRegisterForm, setShowRegisterForm] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [username, setUsername] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [userPassword, setUserPassword] = useState('');
+    const [userName, setUserName] = useState('');
+   // const [userId, setUserId] = useState('');
     const navigate = useNavigate(); // Hook for navigation
 
     const toggleRegisterForm = () => {
@@ -22,13 +23,16 @@ export const LoginForm = () => {
         e.preventDefault();
         // Make HTTP request to login endpoint
         try {
-            const response = await fetch('https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/users?email=' + email + '&password=' + password);
+            const response = await fetch('https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/users?userEmail=' + userEmail + '&userPassword=' + userPassword);
             const userData = await response.json();
+    
             // Check if user exists
             if (response.status === 200) {
-                const username = userData[1];
-                localStorage.setItem('username', username); // Store username in localStorage
-                navigate('/Home', { state: { username } });
+                const userName = userData[1];
+                const userId = userData[0];
+                localStorage.setItem('userName', userName); // Store username in localStorage
+                localStorage.setItem('userId', userId);
+                navigate('/Home', { state: { userName, userId } });
 
             } else if (response.status === 409) {
                 // Authentication failed, display error message
@@ -53,9 +57,9 @@ export const LoginForm = () => {
         e.preventDefault();
 
         const userData = {
-            email: email,
-            username: username,
-            password: password
+            userEmail: userEmail,
+            userName: userName,
+            userPassword: userPassword
         };
 
         try {
@@ -94,15 +98,15 @@ export const LoginForm = () => {
                     <div className="message">{message}</div>
                     <form onSubmit={handleRegister}>
                         <div className="input-box">
-                            <input type="text" placeholder="Email" autoComplete="on" required onChange={(e) => setEmail(e.target.value)} />
+                            <input type="text" placeholder="Email" autoComplete="on" required onChange={(e) => setUserEmail(e.target.value)} />
                             <MdEmail className="icon" />
                         </div>
                         <div className="input-box">
-                            <input type="text" placeholder="Username" autoComplete="on" required onChange={(e) => setUsername(e.target.value)} />
+                            <input type="text" placeholder="Username" autoComplete="on" required onChange={(e) => setUserName(e.target.value)} />
                             <FaUser className="icon" />
                         </div>
                         <div className="input-box">
-                            <input type="password" placeholder="Password" autoComplete="off" required onChange={(e) => setPassword(e.target.value)} />
+                            <input type="password" placeholder="Password" autoComplete="off" required onChange={(e) => setUserPassword(e.target.value)} />
                             <FaLock className="icon" />
                         </div>
                         <button type="submit" className="login-btn">Sign Up</button>
@@ -118,11 +122,11 @@ export const LoginForm = () => {
                     <div className="message">{message}</div>
                     <form onSubmit={handleLogin}>
                         <div className="input-box">
-                            <input type="text" placeholder="User Email" required onChange={(e) => setEmail(e.target.value)} />
+                            <input type="text" placeholder="User Email" required onChange={(e) => setUserEmail(e.target.value)} />
                             <FaUser className="icon" />
                         </div>
                         <div className="input-box">
-                            <input type="password" placeholder="Password" autoComplete="on" required onChange={(e) => setPassword(e.target.value)} />
+                            <input type="password" placeholder="Password" autoComplete="on" required onChange={(e) => setUserPassword(e.target.value)} />
                             <FaLock className="icon" />
                         </div>
                         <div className="remember-forgot">

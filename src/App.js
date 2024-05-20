@@ -9,6 +9,7 @@ import Bible from './Pages/Bible';
 import ReadBible from './Pages/ReadBible';
 import KoreanBibleData from './Components/Assets/bibleKOR.json';
 import { getFullBookName } from './Components/BibleUtil.js';
+import DailyVerse from './Components/DailyVerse.js';
 
 function App() {
 
@@ -17,8 +18,6 @@ function App() {
   useEffect(() => {
     // Fetch and set the Bible data when the component mounts
     setRandomVerse(getRandomVerse());
-    console.log("This is APP: ", {KoreanBibleData});
-
   }, []);
 
   function getRandomVerse() {
@@ -26,7 +25,7 @@ function App() {
     const randomBookIndex = Math.floor(Math.random() * KoreanBibleData.length);
     const randomBook = KoreanBibleData[randomBookIndex];
     const fullBookName = getFullBookName(randomBook.abbrev);
-    console.log(fullBookName);
+  
 
     // Select a random chapter from the selected book
     const randomChapterIndex = Math.floor(Math.random() * randomBook.chapters.length);
@@ -42,6 +41,7 @@ function App() {
 
     // Return an object containing the verse text, chapter number, and verse number
     return {
+      bookAbbreviations: randomBook.abbrev,
       book: fullBookName,
       verse: randomVerse,
       chapter: chapterNumber,
@@ -55,6 +55,7 @@ function App() {
     <div className="container">
       <Router>
         <Routes>
+          <Route path="/dailyVerse" element={<DailyVerse randomVerse={randomVerse} />} />
           <Route path="/" element={<LoginForm />} />
           <Route path="/home" element={<Home randomVerse={randomVerse} />} />
           <Route path="/notes" element={<Notes randomVerse={randomVerse} />} />

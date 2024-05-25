@@ -27,7 +27,7 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-const NotesList = ({userId}) => {
+const NotesList = ({ userId, deleteNote }) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
     const [notes, setNotes] = useState([]);
@@ -39,6 +39,7 @@ const NotesList = ({userId}) => {
         }
     }, [userId]);
 
+    // TODO: 없으면 삭제가 보이는데 있으면 delete가 업데이트가 않됨
     useEffect(() => {
         if (userId) {
             fetchNotes();
@@ -63,7 +64,40 @@ const NotesList = ({userId}) => {
             console.error('Error fetching notes:', error);
         }
     };
-    
+
+
+
+    // const deleteNote = async (noteId) => {
+    //     try {
+    //         const response = await fetch(`https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/notes`, {
+    //             method: 'DELETE',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({
+    //                 noteId: noteId,
+    //                 userId: userId
+    //             }),
+    //         });
+    //         if (response.status === 200) {
+    //             setNotes(notes.filter(note => note.noteId !== noteId));
+    //         } else {
+    //             console.error('Failed to delete note:', response.statusText);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error deleting note:', error);
+    //     }
+    // };
+
+    const handleDelete = () => {
+        if (selectedNote) {
+            console.log('Delete this note:', selectedNote[0]);
+            setNotes(notes.filter(note => note[0] !== selectedNote[0]));
+            deleteNote(selectedNote[0]);
+            closeModal();
+        }
+    };
+
 
     function openModal(note) {
         setSelectedNote(note);
@@ -76,13 +110,6 @@ const NotesList = ({userId}) => {
         setSelectedNote(null);
     }
 
-    function handleDeleteClick() {
-        if (selectedNote) {
-            deleteNote(selectedNote.noteId);
-            setIsOpen(false);
-
-        }
-    }
 
     return (
         <div className='notes-list'>
@@ -108,7 +135,7 @@ const NotesList = ({userId}) => {
                             <button className="modal-button" onClick={closeModal}>Close</button>
                         </div>
                         <p>{selectedNote[6]}</p>
-                        <button className="modal-button" onClick={handleDeleteClick}>Delete</button>
+                        <button className="modal-button" onClick={handleDelete}>Delete</button>
                         <h5>{selectedNote[7]}</h5>
                     </div>
                 )}

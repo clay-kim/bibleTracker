@@ -48,49 +48,35 @@ p {
     border-radius: 0 0 18px 0;
 }
 
-.trio-container {
+.chart-container {
     display: flex;
+    height: 90%;
+    width: 100%;
     justify-content: space-between;
-    margin-top: 20px;
 }
 
 .duo-container {
-    
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40%;
 
 }
 
-
-.title {
-    background-color: turquoise;
-    width: 300px;
-    height: 250px;
+.bar-chart{
+    background-color: #6666669b;
+    width: 55%;
+}
+.pie-chart {
+    background-color: rgb(190, 228, 244);
+    height: 50%;
 }
 
-.title2 {
-    background-color: rgb(66, 178, 234);
-    width: 300px;
-    height: 250px;
+.recent-note-container {
+    background-color: rgb(190, 244, 219);
+    height: 50%;
 }
 
-
-.b1 {
-    background-color: rgb(255, 196, 1);
-    width: 250px;
-    height: 250px;
-}
-.b2 {
-    background-color: rgb(236, 68, 255);
-    width: 250px;
-    height: 250px;
-}
-.b3 {
-    background-color: rgb(115, 224, 75);
-    width: 250px;
-    height: 250px;
-
-}
 .daily-bible-verse{
     position: absolute;
     width: 200px;

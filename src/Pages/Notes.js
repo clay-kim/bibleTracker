@@ -70,17 +70,20 @@ export const Notes = (randomVerse) => {
     const handleSubmit = async () => {
         // Construct the new note object
         const newNote = {
-            userId: parseInt(userId, 10), // Convert to integer
+            userId: parseInt(userId, 10), 
             book: selectedBook,
-            chapter: parseInt(selectedChapter, 10), // Convert to integer
-            startVerse: parseInt(startVerse, 10), // Convert to integer
-            endVerse: parseInt(endVerse, 10), // Convert to integer
+            chapter: parseInt(selectedChapter, 10), 
+            startVerse: parseInt(startVerse, 10), 
+            endVerse: parseInt(endVerse, 10), 
             noteContent: noteContent,
-            createdAt: new Date().toDateString().toString(),
+            createdAt: new Date().toISOString(),
         };
+        console.log(newNote);
 
         if (startVerse > endVerse) {
             alert('Starting verse should be less than or equal to ending verse');
+            setStartVerse('');
+            setEndVerse('');
             return;
 
         } else {
@@ -108,8 +111,7 @@ export const Notes = (randomVerse) => {
                 if (response.ok) {
                     const savedNote = await response.json();
                     setNotes([...notes, savedNote]);
-                   // setNotes((prevNotes) => [...prevNotes, newNote]);
-
+             
                     // Clear input fields
                     setSelectedBook('');
                     setSelectedChapter('');
@@ -138,10 +140,35 @@ export const Notes = (randomVerse) => {
     };
 
 
-    const deleteNote = (noteId) => {
-        setNotes(notes.filter(note => note.noteId !== noteId));
-    };
+    const deleteNote = async(noteId) => {
 
+        const deleteThisNote = {
+            noteId: parseInt(noteId, 10),
+            userId: parseInt(userId, 10), 
+        };
+      
+        console.log('delete================================", noteId: ', deleteThisNote);
+    
+        try {
+            const response = await fetch(`https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/notes`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(deleteThisNote),
+            });
+
+            if (response.ok) {
+                console.log('Delete this note SUCCESS');
+                setNotes(notes.filter(note => note.noteId !== noteId));
+            } else {
+                console.error('Failed to delete note:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error deleting note:', error);
+        }
+    };
+    
 
     // Generating the list of books from the selected book
     const chapterOptions = useMemo(() => {

@@ -27,13 +27,25 @@ export const Home = (randomVerse) => {
                 <SideBarMenu show={showNav} />
 
                 <div className='dashboard-container-home'>
-                    <div className='trio-container'>
+                    <div className='title-container'>
+                        <p>any title??</p>
+                    </div>
+                    <div className='chart-container'>
+                        <div className='bar-chart'>
+                            <p>Bar chart</p>
+                        </div>    
+                    
+                        <div className='duo-container'>
+                            <div className='pie-chart'>
+                                <h1>pieChart</h1>
+                            </div>
+                            <div className='recent-note-container'>
+                                <h1>recent note</h1>
+                            </div>
+                        </div>
+                    </div>
 
-                    </div>
-                    <div className='duo-container'>
-                        <div className='title'><h1>Hello</h1></div>
-                        <div className='title2'><h1>Home</h1></div>
-                    </div>
+
 
                 </div>
             </div>

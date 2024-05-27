@@ -116,8 +116,6 @@ p {
     scroll-behavior: smooth;
     scrollbar-color: rgba(202, 242, 237, 0.85) rgba(11, 19, 39, 0.36);
     scrollbar-width: thin;
-
-    
 }
 
 
@@ -127,7 +125,6 @@ p {
     height: 90%;
     border-radius: 8px;
     box-shadow: 5px 8px #0101013f;
-
 }
 
 .book-list {
@@ -161,5 +158,4 @@ p {
 .hamburgerMenu:hover {
     color: #e3f86f;
     transform: rotate(200deg);
-    
 }

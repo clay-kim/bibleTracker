@@ -72,3 +72,37 @@ export const bookNames = {
 export const getFullBookName = (abbrev) => {
     return bookNames[abbrev] || abbrev; // Return the full name if found, otherwise return the abbreviation itself
 };
+
+
+
+export const bibleGroups = {
+    History: [
+        'Genesis', 'Exodus', 'Leviticus', 'Numbers', 'Deuteronomy', 'Joshua', 'Judges', 'Ruth',
+        '1 Samuel', '2 Samuel', '1 Kings', '2 Kings', '1 Chronicles', '2 Chronicles', 'Ezra',
+        'Nehemiah', 'Esther', 'Acts'
+    ],
+    Poetry: ['Job', 'Psalms', 'Proverbs', 'Ecclesiastes', 'Song of Solomon'],
+    Prophecy: [
+        'Isaiah', 'Jeremiah', 'Lamentations', 'Ezekiel', 'Daniel', 'Hosea', 'Joel', 'Amos',
+        'Obadiah', 'Jonah', 'Micah', 'Nahum', 'Habakkuk', 'Zephaniah', 'Haggai', 'Zechariah',
+        'Malachi', 'Revelation'
+    ],
+    Gospels: ['Matthew', 'Mark', 'Luke', 'John'],
+    Epistles: [
+        'Romans', '1 Corinthians', '2 Corinthians', 'Galatians', 'Ephesians', 'Philippians',
+        'Colossians', '1 Thessalonians', '2 Thessalonians', '1 Timothy', '2 Timothy', 'Titus',
+        'Philemon', 'Hebrews', 'James', '1 Peter', '2 Peter', '1 John', '2 John', '3 John', 'Jude'
+    ]
+};
+
+export const calculateProgress = (books) => {
+    return books.map(book => Math.floor(Math.random() * 100)); // Replace with actual reading data
+};
+
+export const categoryColors = {
+    History: 'rgba(75, 192, 192, 0.7)',
+    Poetry: 'rgba(255, 159, 64, 0.7)',
+    Prophecy: 'rgba(54, 162, 235, 0.7)',
+    Gospels: 'rgba(153, 102, 255, 0.7)',
+    Epistles: 'rgba(255, 205, 86, 0.7)'
+};

@@ -40,7 +40,6 @@ export const Notes = (randomVerse) => {
                         console.log("Current Notes State before update:", notes);
                         setNotes(data);
                         console.log("Notes have been set to:", data);
-                        console.log("before update:", notes);
                     } else {
                         console.error('Fetched data is not an array:', data);
                     }
@@ -70,11 +69,11 @@ export const Notes = (randomVerse) => {
     const handleSubmit = async () => {
         // Construct the new note object
         const newNote = {
-            userId: parseInt(userId, 10), 
+            userId: parseInt(userId, 10),
             book: selectedBook,
-            chapter: parseInt(selectedChapter, 10), 
-            startVerse: parseInt(startVerse, 10), 
-            endVerse: parseInt(endVerse, 10), 
+            chapter: parseInt(selectedChapter, 10),
+            startVerse: parseInt(startVerse, 10),
+            endVerse: parseInt(endVerse, 10),
             noteContent: noteContent,
             createdAt: new Date().toISOString(),
         };
@@ -111,7 +110,7 @@ export const Notes = (randomVerse) => {
                 if (response.ok) {
                     const savedNote = await response.json();
                     setNotes([...notes, savedNote]);
-             
+
                     // Clear input fields
                     setSelectedBook('');
                     setSelectedChapter('');
@@ -140,15 +139,15 @@ export const Notes = (randomVerse) => {
     };
 
 
-    const deleteNote = async(noteId) => {
+    const deleteNote = async (noteId) => {
 
         const deleteThisNote = {
             noteId: parseInt(noteId, 10),
-            userId: parseInt(userId, 10), 
+            userId: parseInt(userId, 10),
         };
-      
+
         console.log('delete================================", noteId: ', deleteThisNote);
-    
+
         try {
             const response = await fetch(`https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/notes`, {
                 method: 'DELETE',
@@ -168,7 +167,7 @@ export const Notes = (randomVerse) => {
             console.error('Error deleting note:', error);
         }
     };
-    
+
 
     // Generating the list of books from the selected book
     const chapterOptions = useMemo(() => {

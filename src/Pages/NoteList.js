@@ -66,29 +66,6 @@ const NotesList = ({ userId, deleteNote }) => {
     };
 
 
-
-    // const deleteNote = async (noteId) => {
-    //     try {
-    //         const response = await fetch(`https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/notes`, {
-    //             method: 'DELETE',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify({
-    //                 noteId: noteId,
-    //                 userId: userId
-    //             }),
-    //         });
-    //         if (response.status === 200) {
-    //             setNotes(notes.filter(note => note.noteId !== noteId));
-    //         } else {
-    //             console.error('Failed to delete note:', response.statusText);
-    //         }
-    //     } catch (error) {
-    //         console.error('Error deleting note:', error);
-    //     }
-    // };
-
     const handleDelete = () => {
         if (selectedNote) {
             console.log('Delete this note:', selectedNote[0]);

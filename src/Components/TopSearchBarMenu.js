@@ -3,16 +3,13 @@ import './TopSearchBarMenu.css';
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import KoreanBibleData from '../Components/Assets/bibleKOR.json';
-import { getFullBookName, bookNames } from './BibleUtil.js';
+import { getFullBookName, bookNames, getFullBookNameEng } from './BibleUtil.js';
 
 export const TopSearchBarMenu = () => {
     const [selectedBook, setSelectedBook] = useState('');
     const [selectedChapter, setSelectedChapter] = useState('');
     const navigate = useNavigate();
-    const [userName, setUserName] = useState(localStorage.getItem('username'));
-
-
-    // Extracting the list of books from the KoreanBibleData
+    const [userName, setUserName] = useState(() => localStorage.getItem('userName'));
     const bookAbbreviations = Object.keys(bookNames);
 
     const handleLogout = () => {
@@ -23,7 +20,7 @@ export const TopSearchBarMenu = () => {
         navigate(`/bible/${selectedBook}/${selectedChapter}`);
     };
 
-    // Generating the list of books from the selected book
+    // Generating the # of chapters from the selected book
     const chapterOptions = useMemo(() => {
         if (!selectedBook) return [];
         const selectedBookData = KoreanBibleData.find((book) => book.abbrev === selectedBook);
@@ -52,7 +49,7 @@ export const TopSearchBarMenu = () => {
                             <option value="">Book</option>
                             {bookAbbreviations.map((bookAbbrev) => (
                                 <option key={bookAbbrev} value={bookAbbrev}>
-                                    {getFullBookName(bookAbbrev)}
+                                    {getFullBookNameEng(getFullBookName(bookAbbrev))}
                                 </option>
                             ))}
                         </select>
@@ -66,7 +63,7 @@ export const TopSearchBarMenu = () => {
                             <option value="">Chapter</option>
                             {chapterOptions.map((chapters) => (
                                 <option key={chapters.value} value={chapters.value}>
-                                    {chapters.label}장
+                                    Chapter {chapters.label}
                                 </option>
                             ))}
                         </select>
@@ -78,7 +75,6 @@ export const TopSearchBarMenu = () => {
             <div className="Logout">
                 <p onClick={handleLogout}>Logout</p>
             </div>
-
         </div>
     );
 

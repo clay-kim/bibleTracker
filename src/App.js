@@ -25,7 +25,6 @@ function App() {
     const randomBookIndex = Math.floor(Math.random() * KoreanBibleData.length);
     const randomBook = KoreanBibleData[randomBookIndex];
     const fullBookName = getFullBookName(randomBook.abbrev);
-  
 
     // Select a random chapter from the selected book
     const randomChapterIndex = Math.floor(Math.random() * randomBook.chapters.length);

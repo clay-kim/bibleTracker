@@ -4,14 +4,12 @@ import TopSearchBarMenu from '../Components/TopSearchBarMenu';
 import SideBarMenu from '../Components/SideBarMenu';
 import { FaRegLightbulb } from "react-icons/fa";
 import KoreanBibleData from '../Components/Assets/bibleKOR.json';
-import { getFullBookName, bookNames } from '../Components/BibleUtil.js';
-import { Link, useNavigate } from 'react-router-dom';
+import { getFullBookName, bookNames, getFullBookNameEng } from '../Components/BibleUtil.js';
+import { Link } from 'react-router-dom';
 import DailyVerse from '../Components/DailyVerse.js';
 
 export const Bible = (randomVerse) => {
     const [showNav, setShowNav] = useState(true);
-    const { bookAbbreviations, book, chapter, verse, verseNumber } = randomVerse.randomVerse || {};
-
     const handleBookClick = (bookAbbrev) => {
         const selectedBook = KoreanBibleData.find(book => book.abbrev === bookAbbrev);
         if (selectedBook) {
@@ -20,13 +18,6 @@ export const Bible = (randomVerse) => {
             console.log(`Book ${bookAbbrev} not found in KoreanBibleData.`);
         }
     };
-
-    const navigate = useNavigate();
-    // read the chapter from 'daily scripture'
-    const handleSearch = () => {
-        navigate(`/bible/${bookAbbreviations}/${chapter}`);
-    };
-
 
     return (
         <div className='dashboard'>
@@ -37,6 +28,7 @@ export const Bible = (randomVerse) => {
 
             <div className='homeMain'>
                 <DailyVerse randomVerse={randomVerse} />
+                
                 <SideBarMenu show={showNav} />
 
                 <div className='dashboard-container-bible'>
@@ -47,7 +39,7 @@ export const Bible = (randomVerse) => {
                             <ul className="book-list">
                                 {Object.keys(bookNames).slice(0, 39).map((bookAbbrev) => (
                                     <li key={bookAbbrev}>
-                                        <Link to={`/bible/${bookAbbrev}`} className="book-link" onClick={() => handleBookClick(bookAbbrev)}>{getFullBookName(bookAbbrev)}</Link>
+                                        <Link to={`/bible/${bookAbbrev}`} className="book-link" onClick={() => handleBookClick(bookAbbrev)}>{getFullBookNameEng(getFullBookName(bookAbbrev))}</Link>
                                     </li>
                                 ))}
                             </ul>
@@ -58,7 +50,7 @@ export const Bible = (randomVerse) => {
                             <ul className="book-list">
                                 {Object.keys(bookNames).slice(39, 66).map((bookAbbrev) => (
                                     <li key={bookAbbrev}>
-                                        <Link to={`/bible/${bookAbbrev}`} className="book-link" onClick={() => handleBookClick(bookAbbrev)}>{getFullBookName(bookAbbrev)}</Link>
+                                        <Link to={`/bible/${bookAbbrev}`} className="book-link" onClick={() => handleBookClick(bookAbbrev)}>{getFullBookNameEng(getFullBookName(bookAbbrev))}</Link>
                                     </li>
                                 ))}
                             </ul>

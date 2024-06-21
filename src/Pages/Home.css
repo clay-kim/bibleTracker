@@ -1,17 +1,9 @@
-.dashboard
-p {
-    font-size: 20px;
-    color: rgb(246, 254, 206);
-}
-
 .hamburgerMenu {
-
     position: absolute;
     color: aliceblue;
     font-size: 25px;
     margin: 15px 0 0 195px;
     cursor: pointer;
-
 }
 
 .hamburgerMenu :hover {
@@ -22,7 +14,6 @@ p {
     color: #9e54e9c1;
     box-shadow: 0 5px #666;
     transform: translateY(3px);
-
 }
 
 .homeMain-home {
@@ -65,23 +56,22 @@ p {
     flex-direction: column;
     justify-content: space-between;
     width: 40%;
-
 }
 
-.bar-chart{
+.bar-chart {
     width: 55%;
     padding: 10px;
     display: flex;
     flex-direction: column;
     overflow: auto;
-    scroll-behavior: smooth;
-    scrollbar-color: rgba(202, 242, 237, 0.85) rgba(11, 19, 39, 0.36);
+    scrollbar-color: rgba(5, 92, 82, 0.85) rgba(21, 36, 73, 0.36);
     scrollbar-width: thin;
-}
-.chart-group{
-    background-color: rgba(35, 15, 85, 0.361);
+    scroll-behavior: smooth;
 }
 
+.chart-group {
+    background-color: rgba(5, 1, 16, 0.361);
+}
 
 .pie-chart {
     background-color: rgba(190, 228, 244, 0);
@@ -89,28 +79,17 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .recent-note-container {
-    background-color: rgba(190, 244, 219, 0);
+    background-color: rgba(5, 1, 16, 0.361);
+    padding: 10px 20px;
     height: 50%;
+    border-radius: 5px;
+    margin-left: 10px;
     overflow: auto;
-    scroll-behavior: smooth;
-    scrollbar-color: rgba(202, 242, 237, 0.85) rgba(11, 19, 39, 0.36);
+    scrollbar-color: rgba(5, 92, 82, 0.85) rgba(21, 36, 73, 0.36);
     scrollbar-width: thin;
+    scroll-behavior: smooth;
 }
 
-.daily-bible-verse{
-    position: absolute;
-    width: 200px;
-    padding: 10px;
-    margin-top: 20px;
-    
-    p{
-        font-size: 15px;
-        color: rgb(255, 255, 224);
-        margin-bottom: 10px;
-        cursor: pointer;
-    }
-}

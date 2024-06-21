@@ -7,13 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
 
-    const [message, setMessage] = useState(""); // State variable for notification/message
+    const [message, setMessage] = useState(""); 
     const [showRegisterForm, setShowRegisterForm] = useState(false);
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [userName, setUserName] = useState('');
-   // const [userId, setUserId] = useState('');
-    const navigate = useNavigate(); // Hook for navigation
+    const navigate = useNavigate(); 
 
     const toggleRegisterForm = () => {
         setShowRegisterForm(!showRegisterForm);
@@ -32,7 +31,7 @@ export const LoginForm = () => {
                 const userId = userData[0];
                 localStorage.setItem('userName', userName); // Store username in localStorage
                 localStorage.setItem('userId', userId);
-                navigate('/Home', { state: { userName, userId } });
+                navigate('/Home', { state: { username: userName } });
 
             } else if (response.status === 409) {
                 // Authentication failed, display error message
@@ -63,7 +62,6 @@ export const LoginForm = () => {
         };
 
         try {
-
             // Check if email already exists in the database
             const response = await fetch('https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/user', {
                 method: 'POST',
@@ -76,7 +74,6 @@ export const LoginForm = () => {
             // Check if user is registered successfully
             if (response.status === 200) {
                 setMessage("Registered successfully");
-                console.log("Registered successfully");
 
             } else {
                 // Registration failed, display error message

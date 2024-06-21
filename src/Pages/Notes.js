@@ -32,14 +32,13 @@ export const Notes = (randomVerse) => {
                 try {
                     const response = await fetch(`https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/notes?userId=${storedUserId}`);
                     const data = await response.json();
-                    setNotes(data);
-                    console.log("API Response:", response);
-                    console.log("Fetched Data:", data);
+
 
                     if (Array.isArray(data)) {
-                        console.log("Current Notes State before update:", notes);
+
                         setNotes(data);
-                        console.log("Notes have been set to:", data);
+                        // console.log("[[NOTE]]:", data);
+
                     } else {
                         console.error('Fetched data is not an array:', data);
                     }
@@ -61,7 +60,7 @@ export const Notes = (randomVerse) => {
         setStartVerse(input);
     };
     const handleEndVerseChange = (e) => {
-        const input = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+        const input = e.target.value.replace(/\D/g, '');
         setEndVerse(input);
     };
 
@@ -79,7 +78,7 @@ export const Notes = (randomVerse) => {
         };
         console.log(newNote);
 
-        if (startVerse > endVerse) {
+        if (startVerse > endVerse && startVerse > 0) {
             alert('Starting verse should be less than or equal to ending verse');
             setStartVerse('');
             setEndVerse('');
@@ -146,8 +145,6 @@ export const Notes = (randomVerse) => {
             userId: parseInt(userId, 10),
         };
 
-        console.log('delete================================", noteId: ', deleteThisNote);
-
         try {
             const response = await fetch(`https://mih7zrpt8g.execute-api.us-west-1.amazonaws.com/default/notes`, {
                 method: 'DELETE',
@@ -170,6 +167,7 @@ export const Notes = (randomVerse) => {
 
 
     // Generating the list of books from the selected book
+    // Tab Menu option
     const chapterOptions = useMemo(() => {
         if (!selectedBook) return [];
         const selectedBookData = KoreanBibleData.find((book) => book.abbrev === selectedBook);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import './NoteList.css';
-import { getFullBookName } from '../Components/BibleUtil';
+import { getFullBookName, getFullBookNameEng } from '../Components/BibleUtil';
 
 
 const customStyles = {
@@ -34,12 +34,11 @@ const NotesList = ({ userId, deleteNote }) => {
 
     useEffect(() => {
         if (userId) {
-            console.log('userID = ' + userId);
             fetchNotes();
         }
     }, [userId]);
 
-    // TODO: 없으면 삭제가 보이는데 있으면 delete가 업데이트가 않됨
+    // NOTE: 없으면 삭제가 보이는데 있으면 delete가 업데이트가 않됨
     useEffect(() => {
         if (userId) {
             fetchNotes();
@@ -93,7 +92,7 @@ const NotesList = ({ userId, deleteNote }) => {
             <h2>Saved Notes</h2>
             {notes.map((note, index) => (
                 <div key={index} className='note-item' onClick={() => openModal(note)}>
-                    <h3>{getFullBookName(note[2])} {note[3]}:{note[4]} - {note[5]}</h3>
+                    <h3>{getFullBookNameEng(getFullBookName(note[2]))} {note[3]}:{note[4]} - {note[5]}</h3>
                     <p>{note[6]}</p>
                 </div>
             ))}
@@ -108,7 +107,7 @@ const NotesList = ({ userId, deleteNote }) => {
                 {selectedNote && (
                     <div className='modal-window'>
                         <div className="button-container">
-                            <h2>{getFullBookName(selectedNote[2])} {selectedNote[3]}장 {selectedNote[4]} - {selectedNote[5]}절</h2>
+                            <h2>{getFullBookNameEng(getFullBookName(selectedNote[2]))} {selectedNote[3]}장 {selectedNote[4]} - {selectedNote[5]}절</h2>
                             <button className="modal-button" onClick={closeModal}>Close</button>
                         </div>
                         <p>{selectedNote[6]}</p>
@@ -117,8 +116,6 @@ const NotesList = ({ userId, deleteNote }) => {
                     </div>
                 )}
             </Modal>
-
-
 
         </div>
     );
